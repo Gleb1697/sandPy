@@ -1,2 +1,2 @@
 # sandPy
-# tolya is gay and he's not afraid of it
+# tolya is ogre and he's not afraid of it
