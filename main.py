@@ -15,17 +15,16 @@ GREEN = (  0, 255,   0)
 RED =   (255,   0,   0)
 SIZEX = 400
 SIZEY = 300
-movex = 10
-movey = 10
-rectsizex = SIZEX/6
-rectsizey = SIZEY/20
-rectx = (SIZEX-rectsizex)/2
-recty = (SIZEY-rectsizey)/2 
 # Set the height and width of the screen
 SIZE = [SIZEX, SIZEY]
 
 class main():
-    
+    movex = 10
+    movey = 10
+    rectsizex = SIZEX/6
+    rectsizey = SIZEY/20
+    rectx = (SIZEX-rectsizex)/2
+    recty = (SIZEY-rectsizey)/2 
     def __init__(self):
         self.screen = pygame.display.set_mode(SIZE)
         pygame.display.set_caption("Example code for the draw module")
@@ -38,10 +37,6 @@ class main():
         self.clock.tick(100)
     
     def run(self): 
-        global rectx
-        global recty
-        global rectsizex
-        global rectsizey
         while True:
             for event in pygame.event.get(): # User did something
                 if event.type == pygame.QUIT: # If user clicked close
@@ -49,13 +44,13 @@ class main():
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT:
-                        rectx -=movex
+                        self.rectx -=self.movex
                     if event.key == pygame.K_RIGHT:
-                        rectx +=movex
+                        self.rectx +=self.movex
                     if event.key == pygame.K_UP:
-                        recty -=movey
+                        self.recty -=self.movey
                     if event.key == pygame.K_DOWN:
-                        recty +=movey 
+                        self.recty +=self.movey 
             # Flag that we are done so we exit this loop
  
     # All drawing code happens after the for loop and but
@@ -63,7 +58,7 @@ class main():
      
     # Clear the screen and set the screen background
             self.screen.fill(WHITE)
-            self.rect = [rectx, recty, rectsizex, rectsizey]
+            self.rect = [self.rectx, self.recty, self.rectsizex, self.rectsizey]
     # Draw a solid rectangle
             pygame.draw.rect(self.screen, BLACK, self.rect)
 
