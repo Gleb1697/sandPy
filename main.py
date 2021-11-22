@@ -38,12 +38,21 @@ class Game():
             keys = pygame.key.get_pressed()
             if keys[pygame.K_LEFT]:
                 self.rectx -= self.movex
+                if self.rectx <= 0 :
+                    self.rectx = 0
             if keys[pygame.K_RIGHT] :
                 self.rectx += self.movex
+                if self.rectx >= SIZEX - self.rectsizex :
+                    self.rectx = SIZEX - self.rectsizex
             if keys[pygame.K_UP]:
                 self.recty -= self.movey
+                if self.recty <= 0 :
+                    self.recty = 0
             if keys[pygame.K_DOWN]:
                 self.recty += self.movey
+                if self.recty >= SIZEY - self.rectsizey :
+                    self.recty = SIZEY - self.rectsizey
+                
 
             self.screen.fill(WHITE)
             self.rect = [self.rectx, self.recty, self.rectsizex, self.rectsizey]
