@@ -28,6 +28,7 @@ class Map:
 
         self._map = new_map
         self.save_to_file()
+        return self._bitmap
 
     def _generate_row(self, prev_top, prev_bottom):
         """" return left/right map row """
@@ -58,7 +59,7 @@ class Cell:
 
 
 class Cave:
-    MIN_PASS_SIZE = 8
+    MIN_PASS_SIZE = 5
     MIN_HEIGHT = 17
     MAX_HEIGHT = 20
     MIN_WIDTH = 100

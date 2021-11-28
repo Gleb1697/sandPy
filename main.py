@@ -1,5 +1,6 @@
 import sys
 import pygame
+import map
 
 BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
@@ -18,23 +19,37 @@ class Game():
     def __init__(self):
         self.movex = 10
         self.movey = 10
-        self.rectsizex = 30
-        self.rectsizey = 30
+        self.rectsizex = 40
+        self.rectsizey = 40
         self.rectx = (SIZEX - self.rectsizex) / 2
         self.recty = (SIZEY - self.rectsizey) / 2
         self.screen = pygame.display.set_mode(SIZE)
+        self.player_height = 1
+        self.player_width = 1
+        self.screen_height = 40
+        self.screen_width = 40
+        self._bitmap = []
+        self.maprectx = SIZEX / self.screen_width
+        self.maprecty = SIZEY / self.screen_height
         pygame.display.set_caption("Game")
 
         self.clock = pygame.time.Clock()
 
     def run(self):
+        self._bitmap = map.Map(self.player_height, self.player_width, self.screen_height, self.screen_width).generate()
         while True:
             self.clock.tick(60)
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
+            self.control_character()
+            self.screen.fill(WHITE)
+            self.draw_map()
+            self.draw_character()
+            pygame.display.flip()
 
+    def control_character(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
             keys = pygame.key.get_pressed()
             if keys[pygame.K_LEFT]:
                 self.rectx -= self.movex
@@ -52,12 +67,26 @@ class Game():
                 self.recty += self.movey
                 if self.recty >= SIZEY - self.rectsizey :
                     self.recty = SIZEY - self.rectsizey
-                
+    
+    def draw_map(self):
+        a = 0
+        for j in self._bitmap:
+            b = 0
+            for i in j:
+                rect = [a, b, self.maprectx, self.maprecty]
+                if i == 0:
+                    pygame.draw.rect(self.screen, BLACK, rect)
+                else:
+                    pygame.draw.rect(self.screen, RED, rect)
+                b += self.maprecty
+            a += self.maprectx
+    def draw_character(self):
+        rect = [self.rectx, self.recty, self.rectsizex, self.rectsizey]
+        pygame.draw.rect(self.screen, BLACK, rect)
 
-            self.screen.fill(WHITE)
-            self.rect = [self.rectx, self.recty, self.rectsizex, self.rectsizey]
-            pygame.draw.rect(self.screen, BLACK, self.rect)
-            pygame.display.flip()
+
+    
+
 
 
 Game().run()
