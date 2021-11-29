@@ -50,23 +50,23 @@ class Game():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_LEFT]:
-                self.rectx -= self.movex
-                if self.rectx <= 0 :
-                    self.rectx = 0
-            if keys[pygame.K_RIGHT] :
-                self.rectx += self.movex
-                if self.rectx >= SIZEX - self.rectsizex :
-                    self.rectx = SIZEX - self.rectsizex
-            if keys[pygame.K_UP]:
-                self.recty -= self.movey
-                if self.recty <= 0 :
-                    self.recty = 0
-            if keys[pygame.K_DOWN]:
-                self.recty += self.movey
-                if self.recty >= SIZEY - self.rectsizey :
-                    self.recty = SIZEY - self.rectsizey
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            self.rectx -= self.movex
+            if self.rectx <= 0 :
+                self.rectx = 0
+        if keys[pygame.K_RIGHT] :
+            self.rectx += self.movex
+            if self.rectx >= SIZEX - self.rectsizex :
+                self.rectx = SIZEX - self.rectsizex
+        if keys[pygame.K_UP]:
+            self.recty -= self.movey
+            if self.recty <= 0 :
+                self.recty = 0
+        if keys[pygame.K_DOWN]:
+            self.recty += self.movey
+            if self.recty >= SIZEY - self.rectsizey :
+                self.recty = SIZEY - self.rectsizey
     
     def draw_map(self):
         a = 0
